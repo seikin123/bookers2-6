@@ -7,6 +7,9 @@ class Book < ApplicationRecord
   has_many :following_user, through: :follower, source: :followed # 自分がフォローしている人
   has_many :follower_user, through: :followed, source: :follower # 自分をフォローしている人
 
+  # コメント機能
+  has_many :book_comments, dependent: :destroy
+  
   # いいね機能
   has_many :favorites, dependent: :destroy
 
