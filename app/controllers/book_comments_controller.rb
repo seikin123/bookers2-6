@@ -1,6 +1,6 @@
 class BookCommentsController < ApplicationController
   before_action :authenticate_user!
-  # コメントした人のみ消せる
+  before_action :correct_user, only: [:destroy] # コメントした人のみ消せる
 
   def create
     @book = Book.find(params[:book_id])
@@ -22,5 +22,12 @@ class BookCommentsController < ApplicationController
 
   def book_comment_params
     params.require(:book_comment).permit(:comment)
+  end
+
+  def correct_user
+    book_comment = current_user.book_comments.find_by(id: params[:id])
+    unless book_comment
+      redirect_to root_url
+    end
   end
 end
