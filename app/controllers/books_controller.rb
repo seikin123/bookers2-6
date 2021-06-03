@@ -30,7 +30,7 @@ end
     @user = @book.user
     # @user = User.find(@book.user_id)
     @book_comment = BookComment.new
-    @book_comments = @book.book_comments
+    @book_comments = @book.book_comments#新着順で表示
   end
 
   def edit
